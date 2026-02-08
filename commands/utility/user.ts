@@ -2,16 +2,16 @@ import {
   CommandInteraction,
   GuildMember,
   SlashCommandBuilder,
-} from 'discord.js';
-import type { Command } from '../command';
+} from "discord.js";
+import type { Command } from "../commands";
 
-export class UserCommand implements Command {
+export default class UserCommand implements Command {
   data = new SlashCommandBuilder()
-    .setName('user')
-    .setDescription('Provides information about the user.');
+    .setName("user")
+    .setDescription("Provides information about the user.");
   execute = async (interaction: CommandInteraction) => {
     if (!interaction.member || !(interaction.member instanceof GuildMember)) {
-      await interaction.reply('This command can only be used in a guild.');
+      await interaction.reply("This command can only be used in a guild.");
       return;
     }
     // interaction.user is the object representing the User who ran the command
