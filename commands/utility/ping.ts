@@ -1,7 +1,7 @@
 import { SlashCommandBuilder, CommandInteraction } from "discord.js";
-import type { Command } from "../commands";
+import type Command from "../command";
 
-export class PingCommand implements Command {
+export default class PingCommand implements Command {
   data = new SlashCommandBuilder()
     .setName("ping")
     .setDescription("Replies with Pong!");

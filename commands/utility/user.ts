@@ -3,7 +3,7 @@ import {
   GuildMember,
   SlashCommandBuilder,
 } from "discord.js";
-import type { Command } from "../commands";
+import type Command from "../command";
 
 export default class UserCommand implements Command {
   data = new SlashCommandBuilder()

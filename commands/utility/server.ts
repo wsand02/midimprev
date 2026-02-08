@@ -1,5 +1,5 @@
 import { CommandInteraction, SlashCommandBuilder } from "discord.js";
-import type { Command } from "../commands";
+import type Command from "../command";
 
 export default class ServerCommand implements Command {
   data = new SlashCommandBuilder()
