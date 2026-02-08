@@ -51,6 +51,7 @@ export default class SynthesizeCommand implements Command {
         wavOut,
       ]);
       const text = await procMidirave.stdout.text();
+      console.log(text);
       const mp3Out = join(tempDir, "output.mp3");
       const procNami = Bun.spawn([
         "nami3",
