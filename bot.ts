@@ -10,6 +10,9 @@ import type { Command } from "./commands/commands";
 export default class Midimprev {
   commands: Map<string, Command>;
   client: Client;
+  token: string;
+  clientId: string;
+  guildId: string;
 
   constructor(
     token: string | undefined,
@@ -29,17 +32,7 @@ export default class Midimprev {
     this.clientId = clientId;
     if (!guildId) throw new Error("No guild ID provided");
     this.guildId = guildId;
-    this.commands = new Map(
-      commands.map((command) => [command.data.name, command]),
-    );
-    this.rest = new REST().setToken(this.token);
     this.deployGuildCommands();
-  }
-
-  public override login(token?: string): Promise<string> {
-    if (!this.token) throw new Error("No token provided");
-    this.deployGuildCommands();
-    return super.login(this.token);
   }
 
   async deployGuildCommands() {
