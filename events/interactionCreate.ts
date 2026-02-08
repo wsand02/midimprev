@@ -26,7 +26,7 @@ export default class InteractionCreateEvent implements Event {
     console.log(command.data.name);
 
     try {
-      await command.execute(interaction);
+      await command.execute(bot, interaction);
     } catch (error) {
       console.error(error);
       if (interaction.replied || interaction.deferred) {

@@ -4,12 +4,13 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 import type Command from "../command";
+import type Midimprev from "../../midimprev";
 
 export default class UserCommand implements Command {
   data = new SlashCommandBuilder()
     .setName("user")
     .setDescription("Provides information about the user.");
-  execute = async (interaction: CommandInteraction) => {
+  execute = async (_bot: Midimprev, interaction: CommandInteraction) => {
     if (!interaction.member || !(interaction.member instanceof GuildMember)) {
       await interaction.reply("This command can only be used in a guild.");
       return;

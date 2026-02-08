@@ -1,6 +1,10 @@
-import type { CommandInteraction, SlashCommandBuilder } from "discord.js";
+import type {
+  SlashCommandBuilder,
+  SlashCommandOptionsOnlyBuilder,
+} from "discord.js";
+import type Midimprev from "../midimprev";
 
 export default interface Command {
-  data: SlashCommandBuilder;
-  execute: (interaction: CommandInteraction) => Promise<void>;
+  data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
+  execute: (bot: Midimprev, ...args: any[]) => Promise<void>;
 }
