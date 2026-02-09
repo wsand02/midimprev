@@ -3,11 +3,15 @@ export default abstract class Proc {
   cliArgs: string[];
   timeoutMin: number;
   process: Bun.Subprocess | undefined;
+  private _stdoutText: string | undefined;
+  private _stderrText: string | undefined;
 
   constructor(execName: string, cliArgs: string[], timeoutMin: number = 2) {
     this.execName = execName;
     this.cliArgs = cliArgs;
     this.timeoutMin = timeoutMin;
+    this._stdoutText = undefined;
+    this._stderrText = undefined;
   }
 
   async exitCode(): Promise<number | null> {
@@ -20,6 +24,9 @@ export default abstract class Proc {
   }
 
   async stdOut(): Promise<string | undefined> {
+    if (this._stdoutText !== undefined) {
+      return this._stdoutText;
+    }
     if (!this.process) {
       console.error(`Process not initialized`);
       return undefined;
@@ -29,17 +36,24 @@ export default abstract class Proc {
       console.error(
         `stdout is not a readable stream (value: ${String(stdout)})`,
       );
-      return undefined;
+      this._stdoutText = "";
+      return this._stdoutText;
     }
     try {
-      return await stdout.text();
+      const text = await stdout.text();
+      this._stdoutText = text;
+      return text;
     } catch (err) {
       console.error("Failed to read stdout:", err);
+      this._stdoutText = "";
       return undefined;
     }
   }
 
   async stdErr(): Promise<string | undefined> {
+    if (this._stderrText !== undefined) {
+      return this._stderrText;
+    }
     if (!this.process) {
       console.error(`Process not initialized`);
       return undefined;
@@ -49,12 +63,16 @@ export default abstract class Proc {
       console.error(
         `stderr is not a readable stream (value: ${String(stderr)}`,
       );
-      return undefined;
+      this._stderrText = "";
+      return this._stderrText;
     }
     try {
-      return await stderr.text();
+      const text = await stderr.text();
+      this._stderrText = text;
+      return text;
     } catch (err) {
       console.error("Failed to read stderr:", err);
+      this._stderrText = "";
       return undefined;
     }
   }
@@ -79,6 +97,8 @@ export default abstract class Proc {
       console.error(message);
       throw new Error(message);
     }
+    if (stdout) console.log(`${this.execName} stdout:\n${stdout}`);
+    if (stderr) console.log(`${this.execName} stderr:\n${stderr}`);
   }
 
   printResourceUsage(): void {
@@ -96,6 +116,8 @@ export default abstract class Proc {
   }
 
   async run(): Promise<void> {
+    this._stdoutText = undefined;
+    this._stderrText = undefined;
     try {
       this.process = Bun.spawn([this.execName, ...this.cliArgs], {
         timeout: this.timeoutMin * 60 * 1000,

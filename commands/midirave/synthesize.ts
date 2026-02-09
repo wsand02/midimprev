@@ -5,7 +5,7 @@ import {
   SlashCommandBuilder,
 } from "discord.js";
 import type Command from "../command";
-import type Midimprev from "../../midimprev";
+import type Bot from "../../bot";
 import { mkdtemp, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
@@ -22,10 +22,7 @@ export default class SynthesizeCommand implements Command {
         .setDescription("The midi file to synthesize.")
         .setRequired(true),
     );
-  execute = async (
-    bot: Midimprev,
-    interaction: ChatInputCommandInteraction,
-  ) => {
+  execute = async (bot: Bot, interaction: ChatInputCommandInteraction) => {
     if (!bot.sf2Path) {
       await interaction.reply("No sf2 file has been configured.");
       return;

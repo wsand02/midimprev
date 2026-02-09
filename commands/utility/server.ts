@@ -1,12 +1,12 @@
 import { CommandInteraction, SlashCommandBuilder } from "discord.js";
 import type Command from "../command";
-import type Midimprev from "../../midimprev";
+import type Bot from "../../bot";
 
 export default class ServerCommand implements Command {
   data = new SlashCommandBuilder()
     .setName("server")
     .setDescription("Provides information about the server.");
-  execute = async (_bot: Midimprev, interaction: CommandInteraction) => {
+  execute = async (_bot: Bot, interaction: CommandInteraction) => {
     if (
       !interaction.guild ||
       !interaction.guild.name ||

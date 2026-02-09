@@ -13,8 +13,9 @@ import type Event from "./events/event";
 import InteractionCreate from "./events/interactionCreate";
 import ReadyEvent from "./events/ready";
 import SynthesizeCommand from "./commands/midirave/synthesize";
+import InstrumentsCommand from "./commands/midirave/instruments";
 
-export default class Midimprev {
+export default class Bot {
   private _commands: Command[];
   private _client: Client;
   private _events: Event[];
@@ -52,10 +53,11 @@ export default class Midimprev {
       new ServerCommand(),
       new UserCommand(),
       new SynthesizeCommand(),
+      new InstrumentsCommand(),
     ];
     this._rest = new REST({ version: "10" }).setToken(this._token); // tänk om dess auth går ut?
     this._events = [new InteractionCreate(), new ReadyEvent()];
-    this.deployGuildCommands();
+    // this.deployGuildCommands();
 
     this.registerEvents();
   }

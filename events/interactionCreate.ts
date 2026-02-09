@@ -1,4 +1,4 @@
-import type Midimprev from "../midimprev";
+import type Bot from "../bot";
 import type Event from "./event";
 import {
   Events,
@@ -9,10 +9,7 @@ import {
 export default class InteractionCreateEvent implements Event {
   name = Events.InteractionCreate;
   once = false;
-  execute = async (
-    bot: Midimprev,
-    interaction: ChatInputCommandInteraction,
-  ) => {
+  execute = async (bot: Bot, interaction: ChatInputCommandInteraction) => {
     if (!interaction.isChatInputCommand()) return;
 
     const command = bot.commandsByName(interaction.commandName);

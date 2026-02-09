@@ -1,11 +1,11 @@
 import { Events, Client } from "discord.js";
-import type Midimprev from "../midimprev";
+import type Bot from "../bot";
 import type Event from "../events/event";
 
 export default class ReadyEvent implements Event {
   name = Events.ClientReady;
   once = true;
-  execute = async (_bot: Midimprev, client: Client) => {
+  execute = async (_bot: Bot, client: Client) => {
     if (!client.user) {
       throw new Error("Client user is not available");
     }

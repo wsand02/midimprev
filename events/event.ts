@@ -1,8 +1,8 @@
 import { Events } from "discord.js";
-import type Midimprev from "../midimprev";
+import type Bot from "../bot";
 
 export default interface Event {
   name: string;
   once: boolean;
-  execute(bot: Midimprev, ...args: any[]): Promise<void>;
+  execute(bot: Bot, ...args: any[]): Promise<void>;
 }

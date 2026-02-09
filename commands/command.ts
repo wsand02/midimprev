@@ -2,9 +2,9 @@ import type {
   SlashCommandBuilder,
   SlashCommandOptionsOnlyBuilder,
 } from "discord.js";
-import type Midimprev from "../midimprev";
+import type Bot from "../bot";
 
 export default interface Command {
   data: SlashCommandBuilder | SlashCommandOptionsOnlyBuilder;
-  execute: (bot: Midimprev, ...args: any[]) => Promise<void>;
+  execute: (bot: Bot, ...args: any[]) => Promise<void>;
 }
