@@ -66,7 +66,6 @@ export default class Midimprev {
 
   public registerEvents() {
     this._events.forEach((event) => {
-      console.log("hello there");
       if (event.once) {
         this._client.once(event.name, (...args) =>
           event.execute(this, ...args),

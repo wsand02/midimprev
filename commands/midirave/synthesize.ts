@@ -59,12 +59,12 @@ export default class SynthesizeCommand implements Command {
       const wavOut = join(tempDir, "output.wav");
 
       const procMidirave = new SynthesizeProc(bot.sf2Path, midiPath, wavOut);
-      await procMidirave.printOutcome();
+      await procMidirave.run();
 
       const mp3Out = join(tempDir, "output.mp3");
 
       const procNami = new NamiProc(wavOut, mp3Out);
-      await procNami.printOutcome();
+      await procNami.run();
 
       const attachment = new AttachmentBuilder(mp3Out);
       await interaction.editReply({
