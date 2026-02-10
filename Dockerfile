@@ -15,7 +15,8 @@ RUN cargo install --path .
 FROM oven/bun:1 AS oven-builder
 WORKDIR /usr/src/app
 COPY . .
-RUN bun build index.ts --compile --outfile midimprev
+RUN bun install --frozen-lockfile --production
+RUN bun build ./src/index.ts --compile --outfile midimprev
 
 FROM debian:trixie-slim AS runner
 # nami3 requires GLIBC

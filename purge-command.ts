@@ -1,4 +1,4 @@
-import Bot from "./bot";
+import Bot from "./src/bot";
 
 const args = process.argv.slice(2);
 
