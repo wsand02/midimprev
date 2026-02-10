@@ -1,0 +1,12 @@
+services:
+  midimprev:
+    image: midimprev:latest
+    restart: no
+    container_name: midimprev
+    environment:
+      DISCORD_TOKEN: "DISCORD_TOKEN here"
+      DISCORD_GUILD_ID: "DISCORD_GUILD_ID here"
+      DISCORD_CLIENT_ID: "DISCORD_CLIENT_ID here"
+      SF2_PATH: "/usr/var/sf2/Touhou.sf2"
+    volumes:
+      - ./sf2:/usr/var/sf2

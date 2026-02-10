@@ -57,7 +57,7 @@ export default class Bot {
     ];
     this._rest = new REST({ version: "10" }).setToken(this._token); // tänk om dess auth går ut?
     this._events = [new InteractionCreate(), new ReadyEvent()];
-    // this.deployGuildCommands();
+    this.deployGuildCommands();
 
     this.registerEvents();
   }

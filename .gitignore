@@ -39,3 +39,6 @@ data
 *.mid
 *.wav
 *.mp3
+sf2
+*.exe
+docker-compose.yml
