@@ -3,6 +3,7 @@ services:
     image: midimprev:latest
     restart: no
     container_name: midimprev
+    build: .
     environment:
       DISCORD_TOKEN: "DISCORD_TOKEN here"
       DISCORD_GUILD_ID: "DISCORD_GUILD_ID here"
