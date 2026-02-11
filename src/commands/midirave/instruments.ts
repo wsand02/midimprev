@@ -21,7 +21,10 @@ export default class InstrumentsCommand implements Command {
     await interaction.deferReply();
 
     try {
-      const procInstruments = new InstrumentsProc(bot.sf2Path);
+      const procInstruments = new InstrumentsProc(
+        bot.sf2Path,
+        bot.subprocessTimeout,
+      );
       await procInstruments.run();
 
       await interaction.editReply({

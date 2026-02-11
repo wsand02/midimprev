@@ -23,6 +23,7 @@ export default class Bot {
   private _clientId: string;
   private _guildId: string;
   private _sf2Path?: string;
+  private _subprocessTimeout: number;
   private _rest: REST;
 
   constructor(
@@ -30,6 +31,7 @@ export default class Bot {
     guildId: string | undefined,
     clientId: string | undefined,
     sf2Path?: string,
+    subprocessTimeout: number = 2,
   ) {
     this._client = new Client({
       intents: [
@@ -47,6 +49,7 @@ export default class Bot {
     if (sf2Path) {
       this._sf2Path = sf2Path;
     }
+    this._subprocessTimeout = subprocessTimeout;
 
     this._commands = [
       new PingCommand(),
@@ -106,5 +109,9 @@ export default class Bot {
 
   public get sf2Path(): string | undefined {
     return this._sf2Path;
+  }
+
+  public get subprocessTimeout(): number {
+    return this._subprocessTimeout;
   }
 }
