@@ -2,7 +2,7 @@ FROM rust:1.93 AS rust-builder
 
 # clone and install midirave
 WORKDIR /usr/src/
-RUN git clone https://github.com/wsand02/midirave
+RUN git clone --depth 1 --branch v0.1.0-pasta https://github.com/wsand02/midirave
 WORKDIR /usr/src/midirave
 RUN cargo install --path .
 
