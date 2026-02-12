@@ -4,9 +4,7 @@ midimprev is a Discord bot designed for musicians and hobbyists to share MIDI me
 
 Built with TypeScript, powered by the Bun runtime, and utilizing high-performance MIDI synthesis.
 
-> I am just getting this out the door after being in the pipeline for a year. The reason for it's existence no longer exists, just want this over with.
-
----
+> I am just getting this out the door after being in the pipeline for a year. The reason for it's existence no longer exists, just want to get this off my plate.
 
 ## Features
 
@@ -45,7 +43,7 @@ Before you begin, ensure you have the following installed:
 ### Manual Installation (Local Development)
 
 > [!NOTE]
-> Manual installation requires midirave and nami3 to be compiled and available in your system path.
+> Manual installation requires midirave (version v0.1.0-pasta) and nami3 to be compiled and available in your system path.
 
 1. **Install dependencies:**
    ```bash
@@ -57,8 +55,6 @@ Before you begin, ensure you have the following installed:
    bun run src/index.ts
    ```
 
----
-
 ## Environment Variables
 
 The bot requires the following environment variables to function:
@@ -69,24 +65,23 @@ The bot requires the following environment variables to function:
 - `SF2_PATH`: Path to your SoundFont file (e.g., /sf2/Touhou.sf2 or /sf2/FluidR3_GM.sf2)
 - `SUBPROCESS_TIMEOUT`: (Optional) Timeout for synthesis subprocesses in minutes (default: 2)
 
----
-
 ## Commands
 
 ### MIDI Previewing
 - **`/synthesize [attachment]`**
   - **Description**: Synthesizes a provided MIDI file into an MP3.
   - **Usage**: Upload a .mid file and run the command.
+
+![Command](docs/img/midicommand.png) ![Output](docs/img/output.png)
+
 - **`/instruments`**
   - **Description**: Lists instruments available in the configured SoundFont.
   - **Note**: This is currently a developer utility and output may vary.
 
 ### Utility
-- **`/ping`**: Checks bot latency.
+- **`/ping`**: Pong.
 - **`/server`**: Displays information about the current server.
 - **`/user`**: Displays information about the user.
-
----
 
 ## Project Structure
 
