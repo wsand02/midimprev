@@ -4,9 +4,7 @@ midimprev is a Discord bot designed for musicians and hobbyists to share MIDI me
 
 Built with TypeScript, powered by the Bun runtime, and utilizing high-performance MIDI synthesis.
 
-> I am just getting this out the door after being in the pipeline for a year. The reason for it's existence no longer exists, just want this over with.
-
----
+> I am just getting this out the door after being in the pipeline for a year. The reason for it's existence no longer exists, just want to get this off my plate.
 
 ## Features
 
@@ -25,6 +23,12 @@ Before you begin, ensure you have the following installed:
 - A SoundFont (.sf2) file (e.g., FluidR3_GM.sf2 or Touhou.sf2)
 
 ## Installation
+
+### Permissions
+> [!NOTE]
+> You might be able to get by with lesser permissions, but these are the ones I used during development.
+![Attach files, Embed Links, Read Message History, Send Messages, View Channels](docs/img/permissions.png)
+
 
 ### Using Docker (Recommended)
 
@@ -45,7 +49,7 @@ Before you begin, ensure you have the following installed:
 ### Manual Installation (Local Development)
 
 > [!NOTE]
-> Manual installation requires midirave and nami3 to be compiled and available in your system path.
+> Manual installation requires midirave (version v0.1.0-pasta) and nami3 to be compiled and available in your system path.
 
 1. **Install dependencies:**
    ```bash
@@ -57,36 +61,40 @@ Before you begin, ensure you have the following installed:
    bun run src/index.ts
    ```
 
----
-
 ## Environment Variables
 
 The bot requires the following environment variables to function:
 
 - `DISCORD_TOKEN`: Your Discord Bot Token
 - `DISCORD_CLIENT_ID`: Your Bot's Application ID
-- `DISCORD_GUILD_ID`: The ID of the server for command deployment
+- `DISCORD_GUILD_ID`: (Optional) The ID of the server for server specific command deployment
 - `SF2_PATH`: Path to your SoundFont file (e.g., /sf2/Touhou.sf2 or /sf2/FluidR3_GM.sf2)
 - `SUBPROCESS_TIMEOUT`: (Optional) Timeout for synthesis subprocesses in minutes (default: 2)
 
----
+## Launch Flags
+`--purgeGlobal [commandId]` Deletes a specific command globally.
+`--purgeGuild` Deletes all commands from the configured GUILD_ID.
+`--deployGlobal` Deploys all commands globally.
+`--deployGuild` Deploys all commands to the configured GUILD_ID.
+`--skipLogin` For running flags without launching the bot.
 
-## Commands
+## Bot Commands
 
 ### MIDI Previewing
 - **`/synthesize [attachment]`**
   - **Description**: Synthesizes a provided MIDI file into an MP3.
   - **Usage**: Upload a .mid file and run the command.
+
+![Command](docs/img/midicommand.png) ![Output](docs/img/output.png)
+
 - **`/instruments`**
   - **Description**: Lists instruments available in the configured SoundFont.
-  - **Note**: This is currently a developer utility and output may vary.
+  - **Note**: This is currently a developer utility is currently disabled.
 
 ### Utility
-- **`/ping`**: Checks bot latency.
+- **`/ping`**: Pong.
 - **`/server`**: Displays information about the current server.
 - **`/user`**: Displays information about the user.
-
----
 
 ## Project Structure
 
@@ -97,7 +105,6 @@ The bot requires the following environment variables to function:
 
 ## Limitations
 
-- Currently optimized for single-server deployment.
 - Requires specific external binaries ([midirave](https://github.com/wsand02/midirave) and [nami3](https://github.com/wsand02/nami3)) for synthesis.
 - Designed primarily for self-hosting.
 

@@ -1,10 +1,4 @@
-import {
-  Client,
-  REST,
-  type ClientOptions,
-  Routes,
-  GatewayIntentBits,
-} from "discord.js";
+import { Client, REST, Routes, GatewayIntentBits } from "discord.js";
 import type Command from "./commands/command";
 import PingCommand from "./commands/utility/ping";
 import ServerCommand from "./commands/utility/server";
@@ -13,7 +7,7 @@ import type Event from "./events/event";
 import InteractionCreate from "./events/interactionCreate";
 import ReadyEvent from "./events/ready";
 import SynthesizeCommand from "./commands/midirave/synthesize";
-import InstrumentsCommand from "./commands/midirave/instruments";
+// import InstrumentsCommand from "./commands/midirave/instruments";
 
 export default class Bot {
   private _commands: Command[];
@@ -21,8 +15,8 @@ export default class Bot {
   private _events: Event[];
   private _token: string;
   private _clientId: string;
-  private _guildId: string;
-  private _sf2Path?: string;
+  private _guildId?: string;
+  private _sf2Path?: string; // optional so you can run cli commands without having to have a sf2 file
   private _subprocessTimeout: number;
   private _rest: REST;
 
@@ -44,7 +38,6 @@ export default class Bot {
     this._token = token;
     if (!clientId) throw new Error("No client ID provided");
     this._clientId = clientId;
-    if (!guildId) throw new Error("No guild ID provided");
     this._guildId = guildId;
     if (sf2Path) {
       this._sf2Path = sf2Path;
@@ -56,11 +49,11 @@ export default class Bot {
       new ServerCommand(),
       new UserCommand(),
       new SynthesizeCommand(),
-      new InstrumentsCommand(),
+      // new InstrumentsCommand(), // disabled for now
     ];
     this._rest = new REST({ version: "10" }).setToken(this._token); // tänk om dess auth går ut?
     this._events = [new InteractionCreate(), new ReadyEvent()];
-    this.deployGuildCommands();
+    //this.deployGuildCommands();
 
     this.registerEvents();
   }
@@ -82,14 +75,23 @@ export default class Bot {
   }
 
   public async deployGuildCommands() {
-    const body = this._commands.map((c) => c.data.toJSON());
+    if (!this._guildId) throw new Error("Guild ID not set");
     await this._rest.put(
       Routes.applicationGuildCommands(this._clientId, this._guildId),
-      { body },
+      {
+        body: this._commands.map((c) => c.data.toJSON()),
+      },
     );
   }
 
+  public async deployGlobalCommands() {
+    await this._rest.put(Routes.applicationCommands(this._clientId), {
+      body: this._commands.map((c) => c.data.toJSON()),
+    });
+  }
+
   public async purgeGuildCommands() {
+    if (!this._guildId) throw new Error("Guild ID not set");
     await this._rest.put(
       Routes.applicationGuildCommands(this._clientId, this._guildId),
       { body: [] },
