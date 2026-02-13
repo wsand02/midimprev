@@ -24,6 +24,12 @@ Before you begin, ensure you have the following installed:
 
 ## Installation
 
+### Permissions
+> [!NOTE]
+> You might be able to get by with lesser permissions, but these are the ones I used during development.
+![Attach files, Embed Links, Read Message History, Send Messages, View Channels](docs/img/permissions.png)
+
+
 ### Using Docker (Recommended)
 
 1. **Clone the repository:**
@@ -61,11 +67,18 @@ The bot requires the following environment variables to function:
 
 - `DISCORD_TOKEN`: Your Discord Bot Token
 - `DISCORD_CLIENT_ID`: Your Bot's Application ID
-- `DISCORD_GUILD_ID`: The ID of the server for command deployment
+- `DISCORD_GUILD_ID`: (Optional) The ID of the server for server specific command deployment
 - `SF2_PATH`: Path to your SoundFont file (e.g., /sf2/Touhou.sf2 or /sf2/FluidR3_GM.sf2)
 - `SUBPROCESS_TIMEOUT`: (Optional) Timeout for synthesis subprocesses in minutes (default: 2)
 
-## Commands
+## Launch Flags
+`--purgeGlobal [commandId]` Deletes a specific command globally.
+`--purgeGuild` Deletes all commands from the configured GUILD_ID.
+`--deployGlobal` Deploys all commands globally.
+`--deployGuild` Deploys all commands to the configured GUILD_ID.
+`--skipLogin` For running flags without launching the bot.
+
+## Bot Commands
 
 ### MIDI Previewing
 - **`/synthesize [attachment]`**
@@ -76,7 +89,7 @@ The bot requires the following environment variables to function:
 
 - **`/instruments`**
   - **Description**: Lists instruments available in the configured SoundFont.
-  - **Note**: This is currently a developer utility and output may vary.
+  - **Note**: This is currently a developer utility is currently disabled.
 
 ### Utility
 - **`/ping`**: Pong.
@@ -92,7 +105,6 @@ The bot requires the following environment variables to function:
 
 ## Limitations
 
-- Currently optimized for single-server deployment.
 - Requires specific external binaries ([midirave](https://github.com/wsand02/midirave) and [nami3](https://github.com/wsand02/nami3)) for synthesis.
 - Designed primarily for self-hosting.
 
