@@ -33,18 +33,23 @@ Before you begin, ensure you have the following installed:
 ### Using Docker (Recommended)
 
 1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/wsand02/midimprev.git
-   cd midimprev
-   ```
+```bash
+git clone https://github.com/wsand02/midimprev.git
+cd midimprev
+```
 
 2. **Configure your environment:**
-   Copy docker-compose.yml.example to docker-compose.yml and fill in the environment variables.
+Copy docker-compose.yml.example to docker-compose.yml and fill in the environment variables.
 
-3. **Deploy with Docker Compose:**
-   ```bash
-   docker-compose up -d --build
-   ```
+3. **Deploy commands**
+```bash
+docker compose run --build --rm bot --skipLogin --deployGlobal
+```
+
+4. **Deploy with Docker Compose:**
+```bash
+docker-compose up -d --build
+```
 
 ### Manual Installation (Local Development)
 
@@ -52,14 +57,19 @@ Before you begin, ensure you have the following installed:
 > Manual installation requires midirave (version v0.1.0-pasta) and nami3 to be compiled and available in your system path.
 
 1. **Install dependencies:**
-   ```bash
-   bun install
-   ```
+```bash
+bun install
+```
 
-2. **Run the bot:**
-   ```bash
-   bun run src/index.ts
-   ```
+2. **Deploy commands:**
+```bash
+bun run src/index.ts --deployGlobal --skipLogin
+```
+
+3. **Run the bot:**
+```bash
+bun run src/index.ts
+```
 
 ## Environment Variables
 
