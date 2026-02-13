@@ -1,7 +1,7 @@
 services:
-  midimprev:
+  bot:
     image: midimprev:latest
-    restart: no
+    restart: unless-stopped
     container_name: midimprev
     build: .
     environment:
