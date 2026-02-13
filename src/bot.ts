@@ -38,7 +38,6 @@ export default class Bot {
     this._token = token;
     if (!clientId) throw new Error("No client ID provided");
     this._clientId = clientId;
-    if (!guildId) throw new Error("No guild ID provided");
     this._guildId = guildId;
     if (sf2Path) {
       this._sf2Path = sf2Path;
