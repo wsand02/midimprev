@@ -117,6 +117,7 @@ The bot requires the following environment variables to function:
 
 - Requires specific external binaries ([midirave](https://github.com/wsand02/midirave) and [nami3](https://github.com/wsand02/nami3)) for synthesis.
 - Designed primarily for self-hosting.
+- Lacks any form of rate limiting.
 
 ## License
 
