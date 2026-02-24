@@ -1,5 +1,8 @@
 # midimprev
 
+> [!CAUTION]
+> Abandoning this since I no longer use Discord.
+
 midimprev is a Discord bot designed for musicians and hobbyists to share MIDI melodies easily. Instead of downloading and synthesizing MIDI files locally, users can generate MP3 previews directly within Discord.
 
 Built with TypeScript, powered by the Bun runtime, and utilizing high-performance MIDI synthesis.
